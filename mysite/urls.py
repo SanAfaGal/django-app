@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import path
-# from django.urls import include
+from django.urls import include
 
 
 urlpatterns = [
@@ -27,5 +27,5 @@ urlpatterns = [
     # Ruta para el panel de administración
     path('admin/', admin.site.urls),
 
-    # path('', include('myapp.urls'))
+    path('', include('myapp.urls'))
 ]
