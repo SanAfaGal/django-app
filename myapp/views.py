@@ -16,7 +16,9 @@ def home(request):
 # def customers(request):
 #     customers_list = list(Customer.objects.values())
 #     return JsonResponse(customers_list, safe=False)
-
+def lista_customers(request):
+    customers = Customer.objects.all()
+    return render(request, 'myapp/customers.html', {'customers': customers})
 
 # def customers_by_id(request, customer_id):
 #     customer = get_object_or_404(Customer, id_customer=customer_id)
