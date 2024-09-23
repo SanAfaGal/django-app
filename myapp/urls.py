@@ -18,6 +18,10 @@ from django.contrib import admin
 urlpatterns = [
     path("home/", views.home),
     path('customers/', lista_customers, name='lista_customers'),
+    path('add/', views.add_customer, name='add_customer'),
+    path('edit/<int:pk>/', views.edit_customer, name='edit_customer'),
+    path('delete/<int:pk>/', views.delete_customer, name='delete_customer'),
+    
     path('breeds/', lista_breeds, name='lista_breeds'),
     path('feedings/', lista_feedings, name='lista_feedings'),
     path('porcines/', lista_porcines, name='lista_porcines'),

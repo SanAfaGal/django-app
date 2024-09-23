@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from .models import Customer
+from .forms import CustomerForm
 from .models import Breed
 from .models import Feeding
 from .models import Porcine
-from django.shortcuts import get_object_or_404
 
 
 def home(request):
@@ -22,6 +22,34 @@ def home(request):
 def lista_customers(request):
     customers = Customer.objects.all()
     return render(request, 'myapp/customers.html', {'customers': customers})
+
+def add_customer(request):
+    if request.method == 'POST':
+        form = CustomerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_customers')
+    else:
+        form = CustomerForm()
+    return render(request, 'myapp/customer_form.html', {'form': form})
+
+def edit_customer(request, pk):
+    customer = get_object_or_404(Customer, pk=pk)
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_customers')
+    else:
+        form = CustomerForm(instance=customer)
+    return render(request, 'myapp/customer_form.html', {'form': form})
+
+def delete_customer(request, pk):
+    customer = get_object_or_404(Customer, pk=pk)
+    if request.method == 'POST':
+        customer.delete()
+        return redirect('lista_customers')
+    return render(request, 'myapp/customer_confirm_delete.html', {'customer': customer})
 
 def lista_breeds(request):
     breeds = Breed.objects.all()
