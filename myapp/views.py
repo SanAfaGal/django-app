@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .models import Customer
+from .models import Breed
 from django.shortcuts import get_object_or_404
 
 
@@ -19,6 +20,10 @@ def home(request):
 def lista_customers(request):
     customers = Customer.objects.all()
     return render(request, 'myapp/customers.html', {'customers': customers})
+
+def lista_breeds(request):
+    breeds = Breed.objects.all()
+    return render(request, 'myapp/breeds.html', {'breeds': breeds})
 
 # def customers_by_id(request, customer_id):
 #     customer = get_object_or_404(Customer, id_customer=customer_id)
