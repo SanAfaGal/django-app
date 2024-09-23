@@ -3,6 +3,8 @@ from . import views
 from .views import home
 from .views import lista_customers
 from .views import lista_breeds
+from .views import lista_feedings
+from .views import lista_porcines
 from django.contrib import admin
 
 # urlpatterns = [
@@ -17,6 +19,8 @@ urlpatterns = [
     path("home/", views.home),
     path('customers/', lista_customers, name='lista_customers'),
     path('breeds/', lista_breeds, name='lista_breeds'),
+    path('feedings/', lista_feedings, name='lista_feedings'),
+    path('porcines/', lista_porcines, name='lista_porcines'),
     # path('', views.index),
     # path('hello/<str:username>', views.hello),
     # path('about/', views.about),

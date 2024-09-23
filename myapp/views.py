@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .models import Customer
 from .models import Breed
+from .models import Feeding
+from .models import Porcine
 from django.shortcuts import get_object_or_404
 
 
@@ -24,6 +26,14 @@ def lista_customers(request):
 def lista_breeds(request):
     breeds = Breed.objects.all()
     return render(request, 'myapp/breeds.html', {'breeds': breeds})
+
+def lista_feedings(request):
+    feedings = Feeding.objects.all()
+    return render(request, 'myapp/feedings.html', {'feedings': feedings})
+
+def lista_porcines(request):
+    porcines = Porcine.objects.all()
+    return render(request, 'myapp/porcines.html', {'porcines': porcines})
 
 # def customers_by_id(request, customer_id):
 #     customer = get_object_or_404(Customer, id_customer=customer_id)
