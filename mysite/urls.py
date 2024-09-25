@@ -22,7 +22,7 @@ from django.urls import include
 
 urlpatterns = [
     # Redirigir la página raíz al panel de administración
-    path('', lambda request: redirect('admin/', permanent=True)),
+    path('', lambda request: redirect('home/', permanent=True)),
 
     # Ruta para el panel de administración
     path('admin/', admin.site.urls),
