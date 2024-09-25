@@ -16,7 +16,7 @@ from django.contrib import admin
 #     path('', include('myapp.urls')),
 # ]
 urlpatterns = [
-    path("customers/", views.home),
+    path("home/", views.home),
     
     path('customers/', views.customer_list, name='customer_list'),
     path('customers/add/', views.add_customer, name='add_customer'),

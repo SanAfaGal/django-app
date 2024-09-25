@@ -11,7 +11,8 @@ from .forms import PorcineForm
 
 
 def home(request):
-    return render(request, 'myapp/customer.html')
+    customers = Customer.objects.all()
+    return render(request, 'myapp/customers.html', {'customers': customers})
 
 
 # Create your views here.
