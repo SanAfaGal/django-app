@@ -15,15 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.shortcuts import redirect
 from django.urls import path
 from django.urls import include
 
 
 urlpatterns = [
-    # Redirigir la página raíz al panel de administración
-    path('', lambda request: redirect('home/', permanent=True)),
-
     # Ruta para el panel de administración
     path('admin/', admin.site.urls),
 

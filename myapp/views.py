@@ -1,31 +1,19 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, JsonResponse
-from .models import Customer
-from .forms import CustomerForm
-from .models import Breed
+
 from .forms import BreedForm
-from .models import Feeding
+from .forms import CustomerForm
 from .forms import FeedingForm
-from .models import Porcine
 from .forms import PorcineForm
+from .models import Breed
+from .models import Customer
+from .models import Feeding
+from .models import Porcine
 
 
-def home(request):
-    customers = Customer.objects.all()
-    return render(request, 'myapp/customers.html', {'customers': customers})
-
-
-# Create your views here.
-
-# def index(request):
-#     return HttpResponse('<h1>Index</h1>')
-
-# def customers(request):
-#     customers_list = list(Customer.objects.values())
-#     return JsonResponse(customers_list, safe=False)
 def customer_list(request):
     customers = Customer.objects.all()
     return render(request, 'myapp/customers.html', {'customers': customers})
+
 
 def add_customer(request):
     if request.method == 'POST':
@@ -37,6 +25,7 @@ def add_customer(request):
         form = CustomerForm()
     return render(request, 'myapp/customer_form.html', {'form': form})
 
+
 def edit_customer(request, pk):
     customer = get_object_or_404(Customer, pk=pk)
     if request.method == 'POST':
@@ -47,6 +36,7 @@ def edit_customer(request, pk):
     else:
         form = CustomerForm(instance=customer)
     return render(request, 'myapp/customer_form.html', {'form': form})
+
 
 def delete_customer(request, pk):
     customer = get_object_or_404(Customer, pk=pk)
@@ -60,6 +50,7 @@ def breed_list(request):
     breeds = Breed.objects.all()
     return render(request, 'myapp/breeds.html', {'breeds': breeds})
 
+
 def add_breed(request):
     if request.method == 'POST':
         form = BreedForm(request.POST)
@@ -69,6 +60,7 @@ def add_breed(request):
     else:
         form = BreedForm()
     return render(request, 'myapp/breed_form.html', {'form': form})
+
 
 def edit_breed(request, pk):
     breed = get_object_or_404(Breed, pk=pk)
@@ -80,6 +72,7 @@ def edit_breed(request, pk):
     else:
         form = BreedForm(instance=breed)
     return render(request, 'myapp/breed_form.html', {'form': form})
+
 
 def delete_breed(request, pk):
     breed = get_object_or_404(Breed, pk=pk)
@@ -93,6 +86,7 @@ def feeding_list(request):
     feedings = Feeding.objects.all()
     return render(request, 'myapp/feedings.html', {'feedings': feedings})
 
+
 def add_feeding(request):
     if request.method == 'POST':
         form = FeedingForm(request.POST)
@@ -102,6 +96,7 @@ def add_feeding(request):
     else:
         form = FeedingForm()
     return render(request, 'myapp/feeding_form.html', {'form': form})
+
 
 def edit_feeding(request, pk):
     feeding = get_object_or_404(Feeding, pk=pk)
@@ -113,6 +108,7 @@ def edit_feeding(request, pk):
     else:
         form = FeedingForm(instance=feeding)
     return render(request, 'myapp/feeding_form.html', {'form': form})
+
 
 def delete_feeding(request, pk):
     feeding = get_object_or_404(Feeding, pk=pk)
@@ -126,6 +122,7 @@ def porcine_list(request):
     porcines = Porcine.objects.all()
     return render(request, 'myapp/porcines.html', {'porcines': porcines})
 
+
 def add_porcine(request):
     if request.method == 'POST':
         form = PorcineForm(request.POST)
@@ -135,6 +132,7 @@ def add_porcine(request):
     else:
         form = PorcineForm()
     return render(request, 'myapp/porcine_form.html', {'form': form})
+
 
 def edit_porcine(request, pk):
     porcine = get_object_or_404(Porcine, pk=pk)
@@ -147,12 +145,14 @@ def edit_porcine(request, pk):
         form = PorcineForm(instance=porcine)
     return render(request, 'myapp/porcine_form.html', {'form': form})
 
+
 def delete_porcine(request, pk):
     porcine = get_object_or_404(Porcine, pk=pk)
     if request.method == 'POST':
         porcine.delete()
         return redirect('porcine_list')
     return render(request, 'myapp/porcine_confirm_delete.html', {'porcine': porcine})
+
 
 # def customers_by_id(request, customer_id):
 #     customer = get_object_or_404(Customer, id_customer=customer_id)
