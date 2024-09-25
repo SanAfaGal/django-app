@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+  <title>{% block title %}App{% endblock %}</title>
+  <style>
+    .sidebar {
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 250px;
+      background-color: #343a40;
+      padding-top: 20px;
+    }
+    .sidebar a {
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 18px;
+      color: white;
+      display: block;
+    }
+    .sidebar a:hover {
+      background-color: #007bff;
+      color: white;
+    }
+    .main-content {
+      margin-left: 260px; /* Same as the width of the sidebar */
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h3 class="text-light ms-3">Menú</h3>
+    <a href="{% url 'customer_list' %}">Clientes</a>
+    <a href="{% url 'porcine_list' %}">Porcinos</a>
+    <a href="{% url 'feeding_list' %}">Alimentación</a>
+    <a href="{% url 'breed_list' %}">Razas</a>
+    <a href="{% url 'customer_porcine_summary' %}">Resumen</a>
+  </div>
+
+  <div class="main-content">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+</body>
+</html>

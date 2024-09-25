@@ -8,9 +8,16 @@
         <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
+{% extends 'base.html' %}
+
+{% block title %}Porcinos{% endblock %}
+
+{% block content %}
+  <h1>Lista de Porcinos</h1>
+
+
   <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1>Lista de Cerdos</h1>
       <a href="{% url 'add_porcine' %}" class="btn btn-success">Añadir Cerdo</a>
     </div>
 
@@ -45,4 +52,5 @@
     </table>
   </div>
 </body>
+{% endblock %}
 </html>

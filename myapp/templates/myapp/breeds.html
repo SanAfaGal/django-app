@@ -6,33 +6,44 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../static/css/style.css">
-</head>
-<body>
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1>Lista de Razas</h1>
-            <a href="#" class="btn-add">Añadir Raza</a>
-        </div>
-        
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered table-striped">
-              <thead class="text-center">
-                <tr>
-                  <th>#</th>
-                  <th>Nombre de la Raza</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for breed in breeds %}
-                    <tr class="text-center">
-                        <td>{{ breed.id_breed }}</td>
-                        <td>{{ breed.breed_name }}</td>
-                    </tr>
-                    {% endfor %}
-              </tbody>
-            </table>
-          </div>
-    </div>
+        <title>Lista de Razas</title>
+      </head>
+      <body>
+        {% extends 'base.html' %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script></body>
-</html>
+{% block title %}Razas{% endblock %}
+
+{% block content %}
+  <h1>Lista de Razas</h1>
+
+
+        <div class="container mt-5">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="{% url 'add_breed' %}" class="btn btn-success">Añadir Raza</a>
+          </div>
+      
+          <table class="table table-hover table-bordered table-striped">
+            <thead class="text-center">
+              <tr>
+                <th>#</th>
+                <th>Nombre de la Raza</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              {% for breed in breeds %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ breed.breed_name }}</td>
+                <td>
+                  <a href="{% url 'edit_breed' breed.id_breed %}" class="btn btn-primary">Editar</a>
+                  <a href="{% url 'delete_breed' breed.id_breed %}" class="btn btn-danger">Eliminar</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </body>
+      {% endblock %}
+      </html>

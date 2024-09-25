@@ -3,7 +3,9 @@ from django.http import HttpResponse, JsonResponse
 from .models import Customer
 from .forms import CustomerForm
 from .models import Breed
+from .forms import BreedForm
 from .models import Feeding
+from .forms import FeedingForm
 from .models import Porcine
 from .forms import PorcineForm
 
@@ -52,13 +54,72 @@ def delete_customer(request, pk):
         return redirect('customer_list')
     return render(request, 'myapp/customer_confirm_delete.html', {'customer': customer})
 
-def lista_breeds(request):
+
+def breed_list(request):
     breeds = Breed.objects.all()
     return render(request, 'myapp/breeds.html', {'breeds': breeds})
 
-def lista_feedings(request):
+def add_breed(request):
+    if request.method == 'POST':
+        form = BreedForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('breed_list')
+    else:
+        form = BreedForm()
+    return render(request, 'myapp/breed_form.html', {'form': form})
+
+def edit_breed(request, pk):
+    breed = get_object_or_404(Breed, pk=pk)
+    if request.method == 'POST':
+        form = BreedForm(request.POST, instance=breed)
+        if form.is_valid():
+            form.save()
+            return redirect('breed_list')
+    else:
+        form = BreedForm(instance=breed)
+    return render(request, 'myapp/breed_form.html', {'form': form})
+
+def delete_breed(request, pk):
+    breed = get_object_or_404(Breed, pk=pk)
+    if request.method == 'POST':
+        breed.delete()
+        return redirect('breed_list')
+    return render(request, 'myapp/breed_confirm_delete.html', {'breed': breed})
+
+
+def feeding_list(request):
     feedings = Feeding.objects.all()
     return render(request, 'myapp/feedings.html', {'feedings': feedings})
+
+def add_feeding(request):
+    if request.method == 'POST':
+        form = FeedingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('feeding_list')
+    else:
+        form = FeedingForm()
+    return render(request, 'myapp/feeding_form.html', {'form': form})
+
+def edit_feeding(request, pk):
+    feeding = get_object_or_404(Feeding, pk=pk)
+    if request.method == 'POST':
+        form = FeedingForm(request.POST, instance=feeding)
+        if form.is_valid():
+            form.save()
+            return redirect('feeding_list')
+    else:
+        form = FeedingForm(instance=feeding)
+    return render(request, 'myapp/feeding_form.html', {'form': form})
+
+def delete_feeding(request, pk):
+    feeding = get_object_or_404(Feeding, pk=pk)
+    if request.method == 'POST':
+        feeding.delete()
+        return redirect('feeding_list')
+    return render(request, 'myapp/feeding_confirm_delete.html', {'feeding': feeding})
+
 
 def porcine_list(request):
     porcines = Porcine.objects.all()
@@ -96,6 +157,9 @@ def delete_porcine(request, pk):
 #     customer = get_object_or_404(Customer, id_customer=customer_id)
 #     return HttpResponse('customer: %s' % customer.first_name)
 
+def customer_porcine_summary(request):
+    customers = Customer.objects.all().prefetch_related('porcine_set__breed', 'porcine_set__feeding')
+    return render(request, 'myapp/customer_porcine_summary.html', {'customers': customers})
 
 # def hello(request, username):
 #      return HttpResponse('<h1>Hello %s </h1>' % username)
