@@ -11,7 +11,7 @@ from .forms import PorcineForm
 
 
 def home(request):
-    return render(request, 'myapp/index.html')
+    return render(request, 'myapp/customer.html')
 
 
 # Create your views here.
