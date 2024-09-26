@@ -2,7 +2,7 @@
 venv/
 
 # Ignorar la base de datos de SQLite
-db.sqlite3
+#db.sqlite3
 
 # Ignorar las migraciones (opcional)
 */migrations/
