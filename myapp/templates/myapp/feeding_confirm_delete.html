@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+  <title>Eliminar Alimentación</title>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>¿Estás seguro de que deseas eliminar la alimentación {{ feeding.description }}?</h1>
+
+    <form method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Eliminar</button>
+      <a href="{% url 'feeding_list' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+  </div>
+</body>
+</html>

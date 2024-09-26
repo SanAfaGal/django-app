@@ -1,0 +1,66 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../static/css/style.css">
+        <title>Resumen de Clientes y Cerdos</title>
+      </head>
+      <body>
+        {% extends 'base.html' %}
+
+{% block title %}Resumen{% endblock %}
+
+{% block content %}
+  <h1>Resumen de Clientes y Cerdos</h1>
+
+
+        <div class="container mt-5">
+      
+          {% for customer in customers %}
+          <div class="card mt-4">
+            <div class="card-header">
+              <h2>{{ customer.first_name }} {{ customer.last_name }}</h2>
+              <p><strong>Identificación:</strong> {{ customer.identification }}</p>
+              <p><strong>Teléfono:</strong> {{ customer.phone_number }}</p>
+              <p><strong>Dirección:</strong> {{ customer.address }}</p>
+            </div>
+            <div class="card-body">
+              {% if customer.porcine_set.all %}
+              <h4>Cerdos a su nombre:</h4>
+              <table class="table table-bordered table-hover">
+                <thead class="text-center">
+                  <tr>
+                    <th>#</th>
+                    <th>Identificación del Cerdo</th>
+                    <th>Raza</th>
+                    <th>Edad</th>
+                    <th>Peso</th>
+                    <th>Alimentación</th>
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                  {% for porcine in customer.porcine_set.all %}
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ porcine.identification }}</td>
+                    <td>{{ porcine.breed.breed_name}}</td>
+                    <td>{{ porcine.age }} años</td>
+                    <td>{{ porcine.weight }} kg</td>
+                    <td>{{ porcine.feeding.description}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% else %}
+              <p>Este cliente no tiene cerdos a su nombre.</p>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </body>
+      {% endblock %}
+      </html>

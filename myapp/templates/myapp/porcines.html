@@ -1,0 +1,56 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+{% extends 'base.html' %}
+
+{% block title %}Porcinos{% endblock %}
+
+{% block content %}
+  <h1>Lista de Porcinos</h1>
+
+
+  <div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <a href="{% url 'add_porcine' %}" class="btn btn-success">Añadir Cerdo</a>
+    </div>
+
+    <table class="table table-hover table-bordered table-striped">
+      <thead class="text-center">
+        <tr>
+          <th>#</th>
+          <th>Identificación</th>
+          <th>Raza</th>
+          <th>Edad</th>
+          <th>Peso</th>
+          <th>Cliente</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        {% for porcine in porcines %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ porcine.identification }}</td>
+          <td>{{ porcine.breed }}</td>
+          <td>{{ porcine.age }}</td>
+          <td>{{ porcine.weight }}kg</td>
+          <td>{{ porcine.customer }}</td>
+          <td>
+            <a href="{% url 'edit_porcine' porcine.id_porcine %}" class="btn btn-primary">Editar</a>
+            <a href="{% url 'delete_porcine' porcine.id_porcine %}" class="btn btn-danger">Eliminar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+{% endblock %}
+</html>

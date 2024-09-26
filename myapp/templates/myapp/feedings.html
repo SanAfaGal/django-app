@@ -1,0 +1,51 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../static/css/style.css">
+        <title>Lista de Alimentaciones</title>
+      </head>
+      <body>
+        {% extends 'base.html' %}
+
+{% block title %}Alimentación{% endblock %}
+
+{% block content %}
+  <h1>Lista de Alimentación</h1>
+
+
+        <div class="container mt-5">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="{% url 'add_feeding' %}" class="btn btn-success">Añadir Alimentación</a>
+          </div>
+      
+          <table class="table table-hover table-bordered table-striped">
+            <thead class="text-center">
+              <tr>
+                <th>#</th>
+                <th>Descripción</th>
+                <th>Dosis</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              {% for feeding in feedings %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ feeding.description }}</td>
+                <td>{{ feeding.dosage }}</td>
+                <td>
+                  <a href="{% url 'edit_feeding' feeding.id_feeding %}" class="btn btn-primary">Editar</a>
+                  <a href="{% url 'delete_feeding' feeding.id_feeding %}" class="btn btn-danger">Eliminar</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </body>
+      {% endblock %}
+      </html>
